@@ -197,6 +197,13 @@ evt.currentTarget.className += " active";
 document.getElementById("defaultOpen").click();
 </script>
 
+<script>
+function constructSearchString(str)
+{
+
+}
+</script>
+
 
 
 <h2>ENVRI FAIR Knowledge Base</h2>
@@ -253,8 +260,19 @@ prefix envriri: <http://envri.eu/RI/>
 <section>
   <nav>
 <div class="search">
-    <input type='text' id='name' placeholder="Search.." />
+    <input type='text' id='search' height= "20px" placeholder="Search.." onkeydown ="SearchFun()" />
 </div>
+
+<script>
+function SearchFun(){
+var x = document.getElementById("search").value;
+var pre = document.getElementById("namespaces").value;
+var que = pre + 'SELECT DISTINCT * WHERE {?s rdfs:label ?label . FILTER(regex(?label,"' + x + '" ,"i"))}';
+if (event.keyCode == 13)
+sparqlSelectQuery(que,endpoint,'rEnvri');
+}
+</script>
+<p id="rEnvri", style="text-align: left;"></p>
  </nav>
 
 
