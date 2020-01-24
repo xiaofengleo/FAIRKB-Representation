@@ -265,11 +265,26 @@ prefix envriri: <http://envri.eu/RI/>
 
 <script>
 function SearchFun(){
+if (event.keyCode == 13){
+
 var x = document.getElementById("search").value;
 var pre = document.getElementById("namespaces").value;
-var que = pre + 'SELECT DISTINCT * WHERE {?s rdfs:label ?label . FILTER(regex(?label,"' + x + '" ,"i"))}';
-if (event.keyCode == 13)
-sparqlSelectQuery(que,endpoint,'rEnvri');
+var que = pre + 'CONSTRUCT { ?s rdfs:label ?label} WHERE { ?s rdfs:label ?label.  FILTER(regex(?label, "' + x + '","i")).}';
+//CONSTRUCT
+//{ ?s rdfs:label ?label }
+//WHERE
+//{
+//?s rdfs:label ?label.
+//FILTER(regex(?label, "ICOS")).
+//}
+
+//var que = pre + 'SELECT DISTINCT * WHERE {?s rdfs:label ?label . FILTER(regex(?label,"' + x + '" ,"i")).}';
+//var que = pre + 'CONSTRUCT {?s ?label} WHERE {?s rdfs:label ?label . FILTER(regex(?label,"' + x + '" ,"i")).}';
+
+
+//sparqlSelectQuery(que,endpoint,'rEnvri');
+sparqlConstructQuery(que,endpoint,'gEnvriG','rEnvriG');
+}
 }
 </script>
 <p id="rEnvri", style="text-align: left;"></p>
