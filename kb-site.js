@@ -1,4 +1,4 @@
-/* kb-site.js
+/* kb-site-mine.js
  * Provides functions for querying SPARQL endpoints and producing tables and network graphs from the results.
  * Requires: D3.js (v5) [https://d3js.org/d3.v5.min.js]
  * Paul Martin 11/5/18
@@ -346,8 +346,8 @@ function updateVisualiser(visualiser, data) {
 
     // Configure the physics simulation for this graph.
     simulations[visualiser] = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(5).strength(500))
-        .force("charge", d3.forceManyBody().strength(500))
+        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(90))
+        .force("charge", d3.forceManyBody().strength(-200))
         .force("center", d3.forceCenter(width / 2, height / 2));
 
     // Obtain a label for every node.
