@@ -176,7 +176,7 @@ height: 600px;
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
-<script src="http://banach.vlan400.uvalight.net/mediawiki/kb-site.js"></script>
+<script src="http://banach.vlan400.uvalight.net/kb-site.js"></script>
 
 <script>
 function openTab(evt, cityName) {
@@ -194,7 +194,7 @@ evt.currentTarget.className += " active";
 }
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+//document.getElementById("defaultOpen").click();
 </script>
 
 <script>
@@ -257,29 +257,43 @@ prefix envriri: <http://envri.eu/RI/>
 <button class="tablinks" onclick="openTab(event, 'role6')">Proposal writers and funding agencies</button>
 </div>
 
-<section>
-  <nav>
 <div class="search">
     <input type='text' id='search' height= "20px" placeholder="Search.." onkeydown ="SearchFun()" />
 </div>
 
 <script>
 function SearchFun(){
+if (event.keyCode == 13){
+
 var x = document.getElementById("search").value;
 var pre = document.getElementById("namespaces").value;
-var que = pre + 'SELECT DISTINCT * WHERE {?s rdfs:label ?label . FILTER(regex(?label,"' + x + '" ,"i"))}';
-if (event.keyCode == 13)
-sparqlSelectQuery(que,endpoint,'rEnvri');
+var que = pre + 'CONSTRUCT { ?s rdfs:label ?label} WHERE { ?s rdfs:label ?label.  FILTER(regex(?label, "' + x + '","i")).}';
+//CONSTRUCT
+//{ ?s rdfs:label ?label }
+//WHERE
+//{
+//?s rdfs:label ?label.
+//FILTER(regex(?label, "ICOS")).
+//}
+
+//var que = pre + 'SELECT DISTINCT * WHERE {?s rdfs:label ?label . FILTER(regex(?label,"' + x + '" ,"i")).}';
+//var que = pre + 'CONSTRUCT {?s ?label} WHERE {?s rdfs:label ?label . FILTER(regex(?label,"' + x + '" ,"i")).}';
+
+
+//sparqlSelectQuery(que,endpoint,'rEnvri');
+sparqlConstructQuery(que,endpoint,'gEnvriG','rEnvriG1');
+}
 }
 </script>
 <p id="rEnvri", style="text-align: left;"></p>
- </nav>
+ 
 
+<section>
 
 <article>
 
 
-<select id="qEnvriG"; name="samplequery";  class="select-css"; onchange="sparqlConstructQuery(document.getElementById('namespaces').value +  this.value, endpoint, 'gEnvriG', 'rEnvriG');" >
+<select id="qEnvriG"; name="samplequery";  class="select-css"; onchange="sparqlConstructQuery(document.getElementById('namespaces').value +  this.value, endpoint, 'gEnvriG', 'rEnvriG1');" >
   <option value="PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX envri: <http://envri.eu/ns/>
 PREFIX rm: <http://www.oil-e.net/ontology/envri-rm.owl#>
@@ -340,61 +354,46 @@ where {
 
 <div  id="role1" class="tabcontent" style="position:relative;  border:1px "> 
 <svg id= "gEnvriG" width= "1000"; height= "600"; style="border:1px solid black;   ">
-
 </svg>
-
-<p id="rEnvriG" style="text-align: left;"></p>
 </div>
 
 <div  id="role2" class="tabcontent" style="position:relative; border:1px "> 
 <svg id= "gEnvriG" width= "1000"; height= "600"; style="border:1px solid black;   ">
-
 </svg>
-
-<p id="rEnvriG" style="text-align: left;"></p>
+<p id="rEnvriG2" style="text-align: left;"></p>
 </div>
 
  <div id="role3" class="tabcontent"  style="position:relative; border:1px "> 
 <svg id= "gEnvriG" width= "1000"; height= "600"; style="border:1px solid black;   ">
-
 </svg>
-
-<p id="rEnvriG" style="text-align: left;"></p>
+<p id="rEnvriG3" style="text-align: left;"></p>
 </div>
 
 <div  id="role4" class="tabcontent" style="position:relative; border:1px "> 
 <svg id= "gEnvriG" width= "1000"; height= "600"; style="border:1px solid black;   ">
-
 </svg>
-
-<p id="rEnvriG" style="text-align: left;"></p>
+<p id="rEnvriG4" style="text-align: left;"></p>
 </div>
 
 <div  id="role5" class="tabcontent" style="position:relative; border:1px "> 
 <svg id= "gEnvriG" width= "1000"; height= "600"; style="border:1px solid black;   ">
-
 </svg>
-
-<p id="rEnvriG" style="text-align: left;"></p>
+<p id="rEnvriG5" style="text-align: left;"></p>
 </div>
 
 <div  id="role6" class="tabcontent" style="position:relative; border:1px "> 
 <svg id= "gEnvriG" width= "1000"; height= "900"; style="border:1px solid black;   ">
-
 </svg>
-
-<p id="rEnvriG" style="text-align: left;"></p>
+<p id="rEnvriG6" style="text-align: left;"></p>
 </div>
-
-
 
 </article>
 
 
 
  <article>
-    <h1> A Panel</h1>
-    <p>When a node is clicked, some detailed info regarding the node will be displayed in this panel.</p>
+
+<p id="rEnvriG1" style="text-align: left;"></p>
   </article>
 </section>
 
